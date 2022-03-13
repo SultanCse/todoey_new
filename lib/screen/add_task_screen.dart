@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddTask extends StatelessWidget {
@@ -29,7 +28,7 @@ class AddTask extends StatelessWidget {
               textAlign: TextAlign.center,
               // maxLines: 4,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextButton(

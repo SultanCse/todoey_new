@@ -75,9 +75,8 @@ class _TaskScreenState extends State<TaskScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.horizontal(
-                  right: Radius.circular(20),
-                  left: Radius.circular(20),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
                 ),
               ),
               child: const TaskList(),
