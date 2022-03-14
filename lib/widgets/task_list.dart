@@ -4,30 +4,32 @@ import 'package:todoey_new/widgets/task_tile.dart';
 import '../model/task.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({
-    Key? key,
-  }) : super(key: key);
+  TaskList({Key? key, required this.items}) : super(key: key);
+  List<Task> items;
+  // List<Task> items = [
+  //   Task(title: "buy milk"),
+  //   Task(title: "buy a cow"),
+  // ];
   @override
   State<TaskList> createState() => _TaskListState();
 }
 
 class _TaskListState extends State<TaskList> {
   bool val = false;
-  List<Task> items = [Task(title: "buy milk"), Task(title: "buy milk"), Task(title: "buy a cow")];
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: items.length,
+      itemCount: widget.items.length,
       itemBuilder: (context, index) {
         return TaskTile(
-          title: items[index].title,
-          taskDone: items[index].isDone,
+          title: widget.items[index].title,
+          taskDone: widget.items[index].isDone,
           onChecked: (value) {
             setState(
               () {
                 // items[index].isDone = value!;
                 // or
-                items[index].toggle();
+                widget.items[index].toggle();
               },
             );
           },

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask({Key? key}) : super(key: key);
-
+  AddTask({Key? key, this.addTaskFun}) : super(key: key);
+  final Function? addTaskFun;
+  String? taskTitle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,16 +24,21 @@ class AddTask extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30, color: Colors.lightBlueAccent),
             ),
-            const TextField(
+            TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (value) {
+                taskTitle = value;
+              },
               // maxLines: 4,
             ),
             const SizedBox(
               height: 20,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                addTaskFun!(taskTitle);
+              },
               child: const Text(
                 "ADD",
                 style: TextStyle(
@@ -41,7 +47,7 @@ class AddTask extends StatelessWidget {
               ),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
+                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 10)),
               ),
             ),
           ],

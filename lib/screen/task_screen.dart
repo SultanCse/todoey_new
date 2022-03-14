@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../model/task.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
@@ -13,6 +14,11 @@ class TaskScreen extends StatefulWidget {
 
 class _TaskScreenState extends State<TaskScreen> {
   // Widget buildButtonSheet(BuildContext context) => Container();
+  List<Task> items = [
+    Task(title: "buy milk"),
+    Task(title: "buy milk"),
+    Task(title: "buy a cow"),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +30,18 @@ class _TaskScreenState extends State<TaskScreen> {
             isScrollControlled: true,
             builder: (BuildContext context) => SingleChildScrollView(
               child: Container(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: const AddTask()),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTask(
+                  addTaskFun: (taskTitle) {
+                    setState(
+                      () {
+                        items.add(Task(title: taskTitle));
+                      },
+                    );
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ),
           );
         },
@@ -39,8 +55,8 @@ class _TaskScreenState extends State<TaskScreen> {
             padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CircleAvatar(
+              children: [
+                const CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.white,
                   child: Icon(
@@ -49,10 +65,10 @@ class _TaskScreenState extends State<TaskScreen> {
                     size: 50,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Todoey",
                   style: TextStyle(
                     color: Colors.white,
@@ -61,8 +77,8 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  "3 Tasks",
-                  style: TextStyle(
+                  "${items.length} Tasks",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                   ),
@@ -79,7 +95,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   top: Radius.circular(20),
                 ),
               ),
-              child: const TaskList(),
+              child: TaskList(items: items),
             ),
           )
         ],
