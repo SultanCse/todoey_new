@@ -1,24 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../model/task.dart';
+import '../business_logic/data.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
-class TaskScreen extends StatefulWidget {
+class TaskScreen extends StatelessWidget {
   const TaskScreen({Key? key}) : super(key: key);
-
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
   // Widget buildButtonSheet(BuildContext context) => Container();
-  List<Task> items = [
-    Task(title: "buy milk"),
-    Task(title: "buy milk"),
-    Task(title: "buy a cow"),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,16 +20,7 @@ class _TaskScreenState extends State<TaskScreen> {
             builder: (BuildContext context) => SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTask(
-                  addTaskFun: (taskTitle) {
-                    setState(
-                      () {
-                        items.add(Task(title: taskTitle));
-                      },
-                    );
-                    Navigator.pop(context);
-                  },
-                ),
+                child: const AddTask(),
               ),
             ),
           );
@@ -77,7 +57,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  "${items.length} Tasks",
+                  "${Provider.of<Data>(context).length()} Tasks",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -95,7 +75,8 @@ class _TaskScreenState extends State<TaskScreen> {
                   top: Radius.circular(20),
                 ),
               ),
-              child: TaskList(items: items),
+              // child: TaskList(items: items),
+              child: TaskList(),
             ),
           )
         ],

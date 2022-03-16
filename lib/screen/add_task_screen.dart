@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../business_logic/data.dart';
+import '../model/task.dart';
 
 class AddTask extends StatelessWidget {
-  AddTask({Key? key, this.addTaskFun}) : super(key: key);
-  final Function? addTaskFun;
-  String? taskTitle;
+  const AddTask({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String? taskTitle;
     return Container(
       color: const Color(0xff757575),
       child: Container(
@@ -37,7 +40,8 @@ class AddTask extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                addTaskFun!(taskTitle);
+                Provider.of<Data>(context, listen: false).addItems(Task(title: taskTitle!));
+                Navigator.pop(context);
               },
               child: const Text(
                 "ADD",

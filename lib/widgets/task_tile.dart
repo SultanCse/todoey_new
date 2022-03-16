@@ -21,8 +21,3 @@ class TaskTile extends StatelessWidget {
     );
   }
 }
-
-//
-// setState(() {
-// taskDone = value!;
-// });
