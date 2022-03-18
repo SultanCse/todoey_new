@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Details extends StatelessWidget {
-  const Details({Key? key}) : super(key: key);
+import '../model/task.dart';
 
+class Details extends StatelessWidget {
+  const Details({Key? key, this.task}) : super(key: key);
+  final Task? task;
+  final prefs = await SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.lightBlueAccent,
+    return Scaffold(
+      body: Container(
+        color: Colors.lightBlueAccent,
+        child: TextFormField(
+          initialValue: "${task?.title}",
+        ),
+        // Text("${task?.title}"),
+      ),
     );
   }
 }
