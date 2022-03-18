@@ -1,20 +1,30 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/task.dart';
 
+// final titles = ['buy milk', 'buy bilk', 'buy cow'];
+
 class Data extends ChangeNotifier {
-  final List<Task> _items = [
-    Task(title: "buy milk"),
-    Task(title: "buy milk"),
-    Task(title: "buy a cow"),
-  ];
+  static List<String> titles = ['buy milk', 'buy bilk', 'buy cow'];
+  final List<Task> _items = titles.map((value) => Task(title: value)).toList();
+
+  static void loadTitles() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    titles = prefs.getStringList('tasks') ?? ["no items found"];
+    print(titles);
+  }
+
   UnmodifiableListView<Task> get items {
     return UnmodifiableListView(_items);
   }
 
-  void addItems(Task task) {
+  void addItems(Task task) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    titles.add(task.title);
+    prefs.setStringList('tasks', titles);
     _items.add(task);
     notifyListeners();
   }
@@ -24,7 +34,10 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItems(Task task) {
+  void removeItems(Task task) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    titles.remove(task.title);
+    prefs.setStringList('tasks', titles);
     _items.remove(task);
     notifyListeners();
   }

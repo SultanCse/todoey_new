@@ -11,6 +11,7 @@ class TaskScreen extends StatelessWidget {
   // Widget buildButtonSheet(BuildContext context) => Container();
   @override
   Widget build(BuildContext context) {
+    Data.loadTitles();
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
@@ -84,7 +85,7 @@ class TaskScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SharedPref()),
+                MaterialPageRoute(builder: (context) => const SharedPreferencesDemo()),
               );
             },
             child: const Text("sharedPref", style: TextStyle(color: Colors.white)),
