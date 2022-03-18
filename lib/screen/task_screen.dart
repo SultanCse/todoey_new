@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoey_new/screen/shared_preference_testing.dart';
 
 import '../business_logic/data.dart';
 import '../widgets/task_list.dart';
@@ -78,6 +79,15 @@ class TaskScreen extends StatelessWidget {
               // child: TaskList(items: items),
               child: TaskList(),
             ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SharedPref()),
+              );
+            },
+            child: const Text("sharedPref", style: TextStyle(color: Colors.white)),
           )
         ],
       ),
