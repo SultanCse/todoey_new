@@ -8,13 +8,15 @@ import '../model/task.dart';
 // final titles = ['buy milk', 'buy bilk', 'buy cow'];
 
 class Data extends ChangeNotifier {
-  static List<String> titles = ['buy milk', 'buy bilk', 'buy cow'];
-  final List<Task> _items = titles.map((value) => Task(title: value)).toList();
+  static List<String> titles = [];
+  static List<Task> _items = [];
 
-  static void loadTitles() async {
+  void loadTitles() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    titles = prefs.getStringList('tasks') ?? ["no items found"];
+    titles = prefs.getStringList('tasks') ?? ['demo item'];
     print(titles);
+    _items = titles.map((value) => Task(title: value)).toList();
+    notifyListeners();
   }
 
   UnmodifiableListView<Task> get items {
@@ -43,6 +45,6 @@ class Data extends ChangeNotifier {
   }
 
   int get length {
-    return items.length;
+    return _items.length;
   }
 }
