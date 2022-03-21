@@ -14,8 +14,19 @@ class Data extends ChangeNotifier {
   void loadTitles() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     titles = prefs.getStringList('tasks') ?? ['demo item'];
-    print(titles);
     _items = titles.map((value) => Task(title: value)).toList();
+    notifyListeners();
+  }
+
+  void updateItem({required Task task, required String newTitle}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // titles.add(task.title);
+    // prefs.setStringList('tasks', titles);
+    // _items.add(task);
+    titles[titles.indexWhere((element) => element.startsWith(task.title))] = newTitle;
+    prefs.setStringList('tasks', titles);
+    _items[titles.indexWhere((element) => element.startsWith(task.title))] = task;
+    print(titles);
     notifyListeners();
   }
 
