@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../business_logic/data.dart';
@@ -30,9 +31,14 @@ class AddTask extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              maxLines: 3,
+              style: GoogleFonts.abel(fontSize: 24),
               onChanged: (value) {
                 taskTitle = value;
               },
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+              ),
               // maxLines: 4,
             ),
             const SizedBox(

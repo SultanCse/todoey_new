@@ -13,21 +13,26 @@ class Data extends ChangeNotifier {
 
   void loadTitles() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    titles = prefs.getStringList('tasks') ?? ['demo item'];
+    titles = prefs.getStringList('tasks') ?? [];
     _items = titles.map((value) => Task(title: value)).toList();
     notifyListeners();
   }
 
   void updateItem({required Task task, required String newTitle}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // titles.add(task.title);
-    // prefs.setStringList('tasks', titles);
-    // _items.add(task);
     titles[titles.indexWhere((element) => element.startsWith(task.title))] = newTitle;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList('tasks', titles);
-    _items[titles.indexWhere((element) => element.startsWith(task.title))] = task;
-    print(titles);
+    loadTitles();
     notifyListeners();
+  }
+
+  int? subStringSize(String title) {
+    if (title.length <= 15) {
+      title.length;
+    } else {
+      return 15;
+    }
+    return null;
   }
 
   UnmodifiableListView<Task> get items {

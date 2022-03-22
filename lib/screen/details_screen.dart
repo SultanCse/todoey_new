@@ -9,6 +9,7 @@ class Details extends StatelessWidget {
   Details({Key? key, this.task}) : super(key: key);
   final Task? task;
   String? newText;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +22,14 @@ class Details extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
                 initialValue: "${task?.title}",
-                style: GoogleFonts.abel(),
+                maxLines: 12,
+                style: GoogleFonts.abel(
+                  textStyle: const TextStyle(fontSize: 32),
+                ),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                 ),
@@ -33,14 +37,25 @@ class Details extends StatelessWidget {
                   newText = text;
                 },
               ),
-              TextButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
-                onPressed: () {
-                  Provider.of<Data>(context, listen: false)
-                      .updateItem(task: task!, newTitle: newText ?? task!.title);
-                  Provider.of<Data>(context, listen: false).loadTitles();
-                },
-                child: const Text("save"),
+              Expanded(
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
+                  ),
+                  onPressed: () {
+                    Provider.of<Data>(context, listen: false)
+                        .updateItem(task: task!, newTitle: newText ?? task!.title);
+                    // Provider.of<Data>(context, listen: false).loadTitles();
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "save",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
               )
             ],
           ),

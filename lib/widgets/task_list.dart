@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +66,7 @@ class TaskList extends StatelessWidget {
                 );
               },
               child: TaskTile(
-                title: item.title,
+                title: item.title.substring(0, data.subStringSize(item.title)),
                 taskDone: item.isDone,
                 onChecked: (val) {
                   data.statusToggle(item);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile(
@@ -14,7 +15,10 @@ class TaskTile extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: taskDone ? const TextStyle(decoration: TextDecoration.lineThrough) : null,
+        style: taskDone
+            ? GoogleFonts.abel(
+                fontSize: 32, decoration: TextDecoration.lineThrough, color: Colors.grey)
+            : GoogleFonts.abel(fontSize: 32),
       ),
       trailing: Checkbox(
         value: taskDone,

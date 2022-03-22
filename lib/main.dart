@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Data().loadTitles();
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: TaskScreen(),
     );
   }
