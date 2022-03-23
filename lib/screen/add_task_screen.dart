@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../business_logic/data.dart';
 import '../model/task.dart';
+import '../widgets/bottom_button.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -44,21 +45,11 @@ class AddTask extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            TextButton(
+            BottomButton(
               onPressed: () {
                 Provider.of<Data>(context, listen: false).addItems(Task(title: taskTitle!));
                 Navigator.pop(context);
               },
-              child: const Text(
-                "ADD",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
-                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 10)),
-              ),
             ),
           ],
         ),
