@@ -29,33 +29,17 @@ class TaskList extends StatelessWidget {
               duration: const Duration(seconds: 1),
               menuItems: [
                 FocusedMenuItem(
-                    title: const Text(
-                      "Remove",
-                      style: TextStyle(fontSize: 32, color: Colors.redAccent),
-                    ),
-                    trailingIcon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                      size: 32,
-                    ),
-                    onPressed: () {
-                      data.removeItems(data.items[index]);
-                    }),
-                FocusedMenuItem(
                   title: const Text(
-                    "Edit",
-                    style: TextStyle(fontSize: 32, color: Colors.green),
+                    "Remove",
+                    style: TextStyle(fontSize: 32, color: Colors.redAccent),
                   ),
                   trailingIcon: const Icon(
-                    Icons.edit,
+                    Icons.delete,
+                    color: Colors.red,
                     size: 32,
-                    color: Colors.green,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Details(task: data.items[index])),
-                    );
+                    data.removeItems(data.items[index]);
                   },
                 ),
               ],
